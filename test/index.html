@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>polling test</title>
+</head>
+<body>
+<h1>polling test</h1>
+
+<p>Welcome use polling, here will shown the message of server.</p>
+
+<div id="myDiv"></div>
+</body>
+<script>
+        var req = new XMLHttpRequest();
+        req.onreadystatechange = function () {
+            if (req.readyState == 4) {
+                if (req.status == 200) {
+                    document.getElementById("myDiv").innerHTML += req.responseText + '<br>';
+                }
+                //setTimeout(getMsg, (req.status == 200 ? 0 : 5000));
+                getMsg();
+            }
+        }
+        getMsg();
+
+        function getMsg() {
+            req.open("GET", "http://localhost:3000/getMsg", true);
+            req.send();
+        }
+</script>
+</html>
